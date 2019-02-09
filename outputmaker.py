@@ -1,17 +1,21 @@
 #!/usr/bin/python3
-import os
-import glob 
+import psycopg2
+import code
 
 def main():
-    dns = [ "./tmp__c_me_potassium.MOV" ]
-    
-    for dn in dns:
-        fns = glob.glob(dn + "/*.csv")
-        ofn = (dn.split('tmp_',1)[1]+".csv")
-        ou = open(ofn,'w')
-        for fn in fns: 
-            ou.write(open(fn).read())
-            # os.remove(f"{fn}")
+    conn=psycopg2.connect("dbname=framedb")
+    cur = conn.cursor()
+
+    cur.execute("SELECT * from csv_lines ORDER BY line_id;")
+
+    ou = open("output.csv",'wb')
+    while 1:
+        tmp = cur.fetchone()
+        if tmp is None:
+            break
+        ou.write(tmp[2].tobytes()+b'\n')
         
+
+    
 if __name__=="__main__":
     main()

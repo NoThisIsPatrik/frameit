@@ -14,3 +14,9 @@ There are there parts:
 * outputmaker.py - Reads csv_lines and writes it to a csv file
 
 Next up will be to redo frameprocessor.py in C++, and make it run in parallel.
+
+To this effect, there are now further files:
+
+* cfp.cpp - proof of concept using libpgxx to access postgresql via C++, iterating over the frames made by framesplitter
+* procj.cpp - PoC using libjpeg to decompress a jpeg file already in memory (as though it had been pulled from postgres) and do something to arbitrarily sized squares of it. At the moment, it turns it grayscale, and maxes the red and green component on alternate squares. Writes to smpl.ppm as a debug output.
+* test.jpg - A picture of my cat, Potassium, used by procj.cpp

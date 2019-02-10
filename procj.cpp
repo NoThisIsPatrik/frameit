@@ -79,9 +79,15 @@ int main () {
         }
     }
     unsigned char *med_buf;
+    char*string_buf;
+    unsigned char *cell_medians;
+    int cmp,cmp_size;
     int med_pos,median;
     med_buf = (unsigned char*)malloc(cx*cy);
+    cmp_size = ((width/cx)+1) * ((height/cy)+1);
 
+    cell_medians = (unsigned char*)malloc(cmp_size);
+    cmp = 0;
     for(j=0;j<height;j+=cy) {
         for(i=0;i<width;i+=cx) {
             int sq,pos,npos,t,ox,oy;
@@ -103,23 +109,28 @@ int main () {
             } else {
                 median = (med_buf[med_pos/2] + med_buf[med_pos/2])/2;
             }
+            cell_medians[cmp++] = median;
 
-            for(oy=0;oy<cy;oy++) {
-                for(ox=0;ox<cx;ox++) {
-                    if(j+oy >= height)
-                        continue;
-                    if(i+ox >= width)
-                        continue;
-                    pos = ((j+oy)*row_stride) + ((i+ox)*3) ;
-                    bmp_buffer[pos] = median;
-                }
-            }
         }
     }
+    free(med_buf);
+    string_buf = (char*)malloc(cmp*4+100);
+    med_pos = 0; 
 
+    rc = sprintf(string_buf, "%.2f", 0.0);
+    med_pos += rc;
+    for(i=0;i<cmp;i++) {
+        rc = sprintf(string_buf+med_pos, ",%d", cell_medians[i]);
+        med_pos += rc;
+    }
+    string_buf[med_pos++] = '\n';
+    string_buf[med_pos++] = '\0';
+
+    puts(string_buf);
+    free(string_buf);
             // sq = (i/cx) + (j/cy) * ((width/cx)+1);
-            
-
+             
+             /*
         // Write a ppm version to demo
 	fd = open("smpl.ppm", O_CREAT | O_WRONLY, 0666);
 	char buf[1024];
@@ -127,6 +138,7 @@ int main () {
 	write(fd, buf, rc); // Write the PPM image header before data
 	write(fd, bmp_buffer, bmp_size); // Write out all RGB pixel data
 	close(fd);
+        */
 
 	free(bmp_buffer); // The decompressed image
 

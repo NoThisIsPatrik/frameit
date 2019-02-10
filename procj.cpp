@@ -7,6 +7,10 @@
 
 #include <jpeglib.h>
 
+int comp( const void *a, const void *b) {
+    return *(char*)a - *(char*)b;
+}
+
 int main () {
 	int rc, i, j;
 
@@ -74,10 +78,14 @@ int main () {
             
         }
     }
-    int n = 0;
+    unsigned char *med_buf;
+    int med_pos,median;
+    med_buf = (unsigned char*)malloc(cx*cy);
+
     for(j=0;j<height;j+=cy) {
         for(i=0;i<width;i+=cx) {
-            int sq,pos,t,ox,oy;
+            int sq,pos,npos,t,ox,oy;
+            med_pos = 0;
             for(oy=0;oy<cy;oy++) {
                 for(ox=0;ox<cx;ox++) {
                     if(j+oy >= height)
@@ -86,15 +94,26 @@ int main () {
                         continue;
 
                     pos = ((j+oy)*row_stride) + ((i+ox)*3) ;
-
-                    if(n%2==0) {
-                        bmp_buffer[pos] = 255;
-                    } else {
-                        bmp_buffer[pos+1] = 255;
+                    med_buf[med_pos++] = bmp_buffer[pos];
                     }
                 }
+            qsort(med_buf,med_pos,1,comp);
+            if(med_pos%2==1) {
+                median = med_buf[med_pos/2];
+            } else {
+                median = (med_buf[med_pos/2] + med_buf[med_pos/2])/2;
             }
-        n++;
+
+            for(oy=0;oy<cy;oy++) {
+                for(ox=0;ox<cx;ox++) {
+                    if(j+oy >= height)
+                        continue;
+                    if(i+ox >= width)
+                        continue;
+                    pos = ((j+oy)*row_stride) + ((i+ox)*3) ;
+                    bmp_buffer[pos] = median;
+                }
+            }
         }
     }
 

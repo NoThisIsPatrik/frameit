@@ -6,7 +6,7 @@ It now uses postgres, expecting a postgresql db named framedb to exist.
 It does not process frames in parallel
 It is written in python3, not C/C++
 
-There are there parts:
+There are these parts:
 
 * initpostgres.py - Creates two tables, frames and csv_lines, to store frames and output lines in
 * framesplitter.py - Splits a video file into keyframes, storing it in postgres under table "frames"

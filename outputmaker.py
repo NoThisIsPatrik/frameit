@@ -1,14 +1,18 @@
 #!/usr/bin/python3
 import psycopg2
 import code
+from sys import argv
 
 def main():
     conn=psycopg2.connect("dbname=framedb")
     cur = conn.cursor()
 
     cur.execute("SELECT * from csv_lines ORDER BY line_id;")
+    if len(argv)<2:
+        print("Usage: outputmaker.py <output file>")
+        exit()
 
-    ou = open("output.csv",'wb')
+    ou = open(argv[1],'wb')
     while 1:
         tmp = cur.fetchone()
         if tmp is None:
@@ -17,6 +21,7 @@ def main():
 
     cur = conn.cursor()
     cur.execute("DELETE from csv_lines;")
+    conn.commit()
     conn.close()
 
 if __name__=="__main__":

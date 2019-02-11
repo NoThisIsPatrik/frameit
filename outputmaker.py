@@ -14,8 +14,10 @@ def main():
         if tmp is None:
             break
         ou.write(tmp[2].tobytes()+b'\n')
-        
 
-    
+    cur = conn.cursor()
+    cur.execute("DELETE from csv_lines;")
+    conn.close()
+
 if __name__=="__main__":
     main()

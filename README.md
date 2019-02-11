@@ -14,5 +14,6 @@ There are these parts:
 * outputmaker.py - Reads csv_lines and writes it to a csv file.
 * cleandb.py - sweeps both tables clean. Use with care, but frequently needed during testing.
 
-(procj.cpp - Uses libjpeg to decompress a jpeg file already in memory (as though it had been pulled from postgres) and calculates the median of specfied size cells. Prints csv with time as 0.00 as placeholder) This is now folded into cfp.cpp. It would probably make sense to keep it in a sparate file, will look into it when making Makefile. For now, I'd rather have too many things laying around than too few)
+(procj.cpp - Uses libjpeg to decompress a jpeg file already in memory as though it had been pulled from postgres, and calculates the median of specfied size cells. Prints csv with time as 0.00 as placeholder) This is now folded into cfp.cpp. It would probably make sense to keep it in a sparate file, will look into it when making Makefile. For now, I'd rather have too many things laying around than too few.
+
 (test.jpg - A picture of my cat, Potassium, used by procj.cpp goes with procj.cpp, unlikely to be needed now)

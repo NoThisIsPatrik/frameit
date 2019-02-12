@@ -38,13 +38,13 @@ python3 -mpip install pillow
 ### libjpeg, libpqxx (standard jpeg and postgres C/C++ libraries)
 apt-get install libjpeg-dev libpqxx-dev
 
-##BUILD:
+## BUILD:
 git clone https://github.com/NoThisIsPatrik/frameit.git
 
 make
 
 
-##EXAMPLE RUN:
+## EXAMPLE RUN:
 
 ./initpostgres.py
 

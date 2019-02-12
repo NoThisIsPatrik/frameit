@@ -23,33 +23,33 @@ There are these parts:
 
 (frameprocessor.py - Proceyframe, splitting into cells, calculating their median grayscale value, write the result to "csv_lines", and deletes the frame from table "frames") This is now superceeded by "frameprocessor", the C++ component actually processing the frames. It is still functional
 
-Prerequisites:
+##Prerequisites:
 
-python3
-libav w/ python bindings
-psycopg2
-PostgreSQL 
-libjpeg
-libpqxx
+python3, libav w/ python bindings, psycopg2, PostgreSQL, libjpeg, libpqxx
 
 If they're not installed, they can be using:
-# python3
+### python3
 apt-get install python3
-# libav + python3 bindings
+### libav + python3 bindings
 apt-get install libavformat-dev libavdevice-dev
 python3 -mpip install av
-# PIL (usually installed, but is used by libav)
+### PIL (usually installed, but is used by libav)
 python3 -mpip install pillow
-# libjpeg, libpqxx (standard jpeg and postgres C/C++ libraries)
+### libjpeg, libpqxx (standard jpeg and postgres C/C++ libraries)
 apt-get install libjpeg-dev libpqxx-dev
 
-BUILD:
+##BUILD:
 git clone https://github.com/NoThisIsPatrik/frameit.git
+
 make
 
-EXAMPLE RUN:
-./initpostgres.py
-./framesplitter.py cube.avi 64 64
-./frameprocessor
-./outputmaker.py cube.csv
 
+##EXAMPLE RUN:
+
+./initpostgres.py
+
+./framesplitter.py cube.avi 64 64
+
+./frameprocessor
+
+./outputmaker.py cube.csv

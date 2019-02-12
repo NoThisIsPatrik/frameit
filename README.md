@@ -1,8 +1,10 @@
 # frameit
-WIP Video Frame Proc
+Video Frame Processor
+
 This is a set of routines for processing keyframes from a video file.
 
 It uses postgres, expecting a postgresql db named framedb to exist.
+
 One can be created with:
 
 sudo -u postgres createdb framedb
@@ -23,7 +25,7 @@ There are these parts:
 
 (frameprocessor.py - Proceyframe, splitting into cells, calculating their median grayscale value, write the result to "csv_lines", and deletes the frame from table "frames") This is now superceeded by "frameprocessor", the C++ component actually processing the frames. It is still functional
 
-##Prerequisites:
+## Prerequisites:
 
 python3, libav w/ python bindings, psycopg2, PostgreSQL, libjpeg, libpqxx
 

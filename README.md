@@ -32,6 +32,7 @@ If they're not installed, they can be using:
 apt-get install python3
 ### libav + python3 bindings
 apt-get install libavformat-dev libavdevice-dev
+
 python3 -mpip install av
 ### PIL (usually installed, but is used by libav)
 python3 -mpip install pillow

@@ -8,4 +8,4 @@ mkmedians.o:
 	g++ -c mkmedians.cpp -ljpeg
 
 clean:
-	rm *.o
+	rm -f *.o frameprocessor

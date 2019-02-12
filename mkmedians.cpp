@@ -9,7 +9,7 @@ int comp( const void *a, const void *b) {
     return *(char*)a - *(char*)b;
 }
 
-char *mkmedians (const unsigned char*jpg_buffer,size_t jpg_size, int cx, int cy, const char* ftime, const char* fname, int frame_id) {
+char *mkmedians (const unsigned char*jpg_buffer,size_t jpg_size, int cx, int cy, const char* ftime) {
 	int rc, i, j;
 
 	struct jpeg_decompress_struct cinfo;

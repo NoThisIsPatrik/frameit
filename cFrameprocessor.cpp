@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
         
         pqxx:binarystring blob(c[n]["frame_data"]);
 
-        meds = mkmedians(blob.data(),blob.size(),cell_x,cell_y,ftime.c_str(),filename.c_str(),frame_id);
+        meds = mkmedians(blob.data(),blob.size(),cell_x,cell_y,ftime.c_str());
         if(!meds) { // Invalid frame
             continue;
         }

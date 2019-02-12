@@ -25,7 +25,8 @@ def main():
                  VALUES(%s, %s, %s, %s, %s) RETURNING frame_id;"""
 
     print(f"Extracting keyframes from {fn}")
-    container = av.open(av.datasets.curated(fn))
+    # container = av.open(av.datasets.curated(fn))
+    container = av.open(fn)
     stream = container.streams.video[0] 
         # TODO Arbitrarily using first stream, check others perhaps?
 

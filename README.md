@@ -3,6 +3,9 @@ WIP Video Frame Proc
 This is a set of routines for processing keyframes from a video file.
 
 It uses postgres, expecting a postgresql db named framedb to exist.
+One can be created with:
+
+sudo -u postgres createdb framedb
 
 Some of it is written in python3, with key portions in C++. The actual processing should probably be in paralell, but how to achive that would depend a little on where this should run. A lot more handling would of course also be required, but again, as an example project without an actual flow in or out, setting up more of a surrounding seems a bit presumptive.
 
@@ -23,15 +26,30 @@ There are these parts:
 Prerequisites:
 
 python3
-libav ("python3 -mpip install av")
-PostgreSQL ("apt-get install postgresql-contrib)
-libjpeg, libpqxx ("apt-get install libjpeg-dev libpqxx-dev")
+libav w/ python bindings
+psycopg2
+PostgreSQL 
+libjpeg
+libpqxx
+
+If they're not installed, they can be using:
+# python3
+apt-get install python3
+# libav + python3 bindings
+apt-get install libavformat-dev libavdevice-dev
+python3 -mpip install av
+# PIL (usually installed, but is used by libav)
+python3 -mpip install pillow
+# libjpeg, libpqxx (standard jpeg and postgres C/C++ libraries)
+apt-get install libjpeg-dev libpqxx-dev
 
 BUILD:
+git clone https://github.com/NoThisIsPatrik/frameit.git
+make
 
--- These files shouldn't be here, and I'm looking for a sane way to remove them while making sure they don't vanish from the commit record.
-
-(procj.cpp - Uses libjpeg to decompress a jpeg file already in memory as though it had been pulled from postgres, and calculates the median of specfied size cells. Prints csv with time as 0.00 as placeholder) This is now folded into cfp.cpp. It would probably make sense to keep it in a sparate file, will look into it when making Makefile. For now, I'd rather have too many things laying around than too few.
-
-(test.jpg - A picture of my cat, Potassium, used by procj.cpp goes with procj.cpp, unlikely to be needed now)
+EXAMPLE RUN:
+./initpostgres.py
+./framesplitter.py cube.avi 64 64
+./frameprocessor
+./outputmaker.py cube.csv
 

@@ -39,7 +39,7 @@ def main():
         cur.execute(sql, (fn, str(sx), str(sy), "%.2f"%(frame.time), ba))
         # code.interact(local=dict(globals(),**locals()))
         fid = cur.fetchone()[0]
-        print(f"Frame put in {fid}")
+        print(f"Keyframe {fid} done")
        
     cur.close()
     conn.commit()

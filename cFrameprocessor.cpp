@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
         }
         
         pqxx::result wr = W.prepared("csvins")(frame_id)(filename)(meds).exec();
-        cout << "(stored line" <<frame_id<<endl;
+        cout << "Line for frame " << frame_id << " done." << endl; 
         free(meds);
       }
       W.commit();

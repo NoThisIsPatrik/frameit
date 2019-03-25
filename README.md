@@ -9,9 +9,9 @@ One can be created with:
 
 sudo -u postgres createdb framedb
 
-Some of it is written in python3, with key portions in C++. The actual processing should probably be in paralell, but how to achive that would depend a little on where this should run. A lot more handling would of course also be required, but again, as an example project without an actual flow in or out, setting up more of a surrounding seems a bit presumptive.
+Some of it is written in python3, with key portions in C++. The actual processing should probably be in parallel, but how to achive that would depend a little on where it would run. 
 
-There are these parts:
+It's split up into these modules:
 
 * initpostgres.py - Creates two tables, "frames" and "csv_lines", to store frames and output lines in
 
